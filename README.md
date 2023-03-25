@@ -17,7 +17,7 @@ This project forks from [https://github.com/tbakerx/react-resume-template](https
 # Run Project
 ### 1. Clone the project
 
-### 2. Run the project
+### 2. Run a  the project
 ```shell
 npm i
 npm start
