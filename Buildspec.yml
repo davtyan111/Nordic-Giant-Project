@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    DOCKERHUB_TOKEN: "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4"
+    DOCKERHUB_TOKEN: dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
 
 phases:
   pre_build:
@@ -12,5 +12,5 @@ phases:
   build:
     commands:
       - echo "Building Docker image..."
-      - docker build -t davtyan111/aws:latest ./dockerfile
+      - docker build -t davtyan111/aws:latest . 
       - docker push davtyan111/aws:latest
