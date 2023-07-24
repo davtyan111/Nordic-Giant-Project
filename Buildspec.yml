@@ -13,4 +13,4 @@ phases:
     commands:
       - echo "Building Docker image..."
       - docker build -t davtyan111/aws:latest . 
-      - docker push davtyan111/aws:latest
+      - docker push davtyan111/aws:latest 
