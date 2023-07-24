@@ -1,12 +1,16 @@
 version: 0.2
 
+env:
+  variables:
+    DOCKERHUB_TOKEN: "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4"
+
 phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - echo $DOCKERHUB_PASSWORD | docker login --username $davtyan111 --password-stdin
+      - docker login --username davtyan111 --password $DOCKERHUB_TOKEN
   build:
     commands:
       - echo "Building Docker image..."
-      - docker build -t $DOCKERHUB_USERNAME/my-image:latest .
-      - docker push $DOCKERHUB_USERNAME/my-image:latest
+      - docker build -t davtyan111/aws:latest .
+      - docker push davtyan111/aws:latest
