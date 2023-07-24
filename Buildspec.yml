@@ -7,6 +7,7 @@ env:
 phases:
   pre_build:
     commands:
+      - set -x  # Enable debugging
       - echo "Logging in to Docker Hub..."
       - docker login --username davtyan111 --password $DOCKERHUB_TOKEN
   build:
