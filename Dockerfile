@@ -6,8 +6,8 @@ WORKDIR /app
 
 RUN npm install -g npm@8.13.2
 
-COPY .  . 
+COPY . . 
 
- EXPOSE 3000
+EXPOSE 3000
 
- CMD [ "npm" , "start" , "build"]
+CMD ["npm", "start", "build"]
