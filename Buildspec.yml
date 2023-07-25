@@ -4,8 +4,8 @@ phases:
     commands:
       - echo "Logging in to Docker Hub..."
       - echo docker permissions
-      - chgrp codebuildgrp /var/run/docker.sock  # Change group ownership of Docker socket
-      - chmod 666 /var/run/docker.sock
+      - chmod +x setup_docker_socket.sh  # Make the script executable
+      - ./setup_docker_socket.sh  # Execute the script to set Docker socket permissions
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
   build:
     commands:
