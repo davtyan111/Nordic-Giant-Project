@@ -3,8 +3,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Docker Hub...
-      - echo "$DOCKERHUB_TOKEN" | docker login -u "davtyan111" --password-stdin
+      - echo "Logging in to Docker Hub..."
+      - echo '$DOCKERHUB_TOKEN' | docker login -u 'davtyan111' --password-stdin
   build:
     commands:
       - echo Building Docker image...
