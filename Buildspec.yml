@@ -16,7 +16,5 @@ phases:
     commands:
       - echo Pushing Docker image to Docker Hub...
       - docker push davtyan111/my-docker-image:latest
-  finally:
-    commands:
       - echo Logging out from Docker Hub...
       - docker logout
