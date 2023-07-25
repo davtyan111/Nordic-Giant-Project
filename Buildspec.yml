@@ -1,13 +1,10 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      docker: 19
   pre_build:
     commands:
       - echo Logging in to Docker Hub...
-      - echo "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4" | docker login -u "davtyan111" --password-stdin
+      - echo "$DOCKERHUB_TOKEN" | docker login -u "davtyan111" --password-stdin
   build:
     commands:
       - echo Building Docker image...
@@ -18,3 +15,7 @@ phases:
       - docker push davtyan111/my-docker-image:latest
       - echo Logging out from Docker Hub...
       - docker logout
+
+artifacts:
+  files:
+    - '**/*'
