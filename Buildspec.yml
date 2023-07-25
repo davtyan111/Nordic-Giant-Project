@@ -4,7 +4,7 @@ phases:
     commands:
       - echo "Logging in to Docker Hub..."
       - echo docker permissions
-      - chmod 666  /var/run/docker.sock
+      - docker images
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
   build:
     commands:
