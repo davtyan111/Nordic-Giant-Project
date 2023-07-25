@@ -1,17 +1,22 @@
 version: 0.2
 
-env:
-  variables:
-    DOCKERHUB_TOKEN: dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
-
 phases:
+  install:
+    runtime-versions:
+      docker: 19
   pre_build:
     commands:
-      - set -x  # Enable debugging
-      - echo "Logging in to Docker Hub..."
-      - docker login --username davtyan111 --password $DOCKERHUB_TOKEN
+      - echo Logging in to Docker Hub...
+      - echo "$DOCKERHUB_TOKEN" | docker login -u "davtyan111" --password-stdin
   build:
     commands:
-      - echo "Building Docker image..."
-      - docker build -t davtyan111/aws:latest . 
-      - docker push davtyan111/aws:latest 
+      - echo Building Docker image...
+      - docker build -t davtyan111/aws:latest .
+  post_build:
+    commands:
+      - echo Pushing Docker image to Docker Hub...
+      - docker push davtyan111/aws:latest
+  finally:
+    commands:
+      - echo Logging out from Docker Hub...
+      - docker logout
