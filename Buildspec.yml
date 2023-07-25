@@ -7,15 +7,15 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Docker Hub...
-      - echo "$DOCKERHUB_TOKEN" | docker login -u "davtyan111" --password-stdin
+      - echo "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4" | docker login -u "davtyan111" --password-stdin
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t davtyan111/aws:latest .
+      - docker build -t davtyan111/my-docker-image:latest .
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push davtyan111/aws:latest
+      - docker push davtyan111/my-docker-image:latest
   finally:
     commands:
       - echo Logging out from Docker Hub...
