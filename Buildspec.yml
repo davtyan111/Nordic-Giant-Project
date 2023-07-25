@@ -1,21 +1,23 @@
 version: 0.2
-
+env:
+  variables:
+    DOCKER_USERNAME: "davtyan111"
+    IMAGE_NAME: "aws"
+    IMAGE_TAG: "v1"
+  parameter-store:
+    DOCKER_PASSWORD: "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4" 
 phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - echo 'dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4' | docker login -u 'davtyan111' --password-stdin
+      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t davtyan111/my-docker-image:latest .
+      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USERNAME/IMAGE_NAME:IMAGE_TAG
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push davtyan111/my-docker-image:latest
+      - docker push $DOCKER_USERNAME/IMAGE_NAME:IMAGE_TAG
       - echo Logging out from Docker Hub...
-      - docker logout
-
-artifacts:
-  files:
-    - '**/*'
