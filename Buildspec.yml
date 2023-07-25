@@ -1,23 +1,17 @@
 version: 0.2
-env:
-  variables:
-    DOCKER_USERNAME: "davtyan111"
-    IMAGE_NAME: "aws"
-    IMAGE_TAG: "v1"
-  parameter-store:
-    DOCKER_PASSWORD: "dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4" 
 phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t $IMAGE_NAME:$IMAGE_TAG .
-      - docker tag $IMAGE_NAME:$IMAGE_TAG $DOCKER_USERNAME/IMAGE_NAME:IMAGE_TAG
+      - docker build -t aws:v1 .
+      - docker tag aws:v1 davtyan111/aws:v1
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push $DOCKER_USERNAME/IMAGE_NAME:IMAGE_TAG
+      - docker push davtyan111/aws:v1
       - echo Logging out from Docker Hub...
+
