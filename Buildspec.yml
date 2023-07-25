@@ -8,11 +8,11 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t davtyan111/my-docker-image:latest .
+      - docker build -t davtyan111/my-docker-image:latest ./
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push davtyan111/my-docker-image:latest
+      - docker push davtyan111/my-docker-image:latest 
       - echo Logging out from Docker Hub...
       - docker logout
 
