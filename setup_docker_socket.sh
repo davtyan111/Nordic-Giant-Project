@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x  # Enable debug mode to see each command's output
+
 # Check if the Docker socket exists
 if [ -S "/var/run/docker.sock" ]; then
     # Change the group ownership of the Docker socket
