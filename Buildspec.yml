@@ -4,8 +4,8 @@ phases:
     commands:
       - echo "Logging in to Docker Hub..."
       - echo docker permissions
-      - umask 000  # Set umask to 000 to allow full permissions
-      - chmod 666 /var/run/docker.sock  # Adjust Docker socket permissions
+      - chgrp codebuildgrp /var/run/docker.sock  # Change group ownership of Docker socket
+      - chmod 666 /var/run/docker.sock
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
   build:
     commands:
