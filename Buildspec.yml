@@ -20,12 +20,12 @@ phases:
   build:
     commands:
       # Build your Docker image (replace "your_docker_image" with your actual image name and tag)
-      - docker build -t aws .
+      - docker build -t davtyan111/template_2 .
 
   post_build:
     commands:
       # Tag your Docker image (replace "your_docker_image" with your actual image name and tag)
-      - docker tag aws:latest davtyan111/aws:latest
+      - docker tag davtyan111/template_2:latest davtyan111/davtyan111/template_2:latest
 
       # Push the Docker image to Docker Hub (replace "davtyan111" with your Docker Hub username)
-      - docker push davtyan111/aws:latest
+      - docker push davtyan111/davtyan111/template_2:latest
