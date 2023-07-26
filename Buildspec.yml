@@ -14,7 +14,10 @@ phases:
       - echo Pushing Docker image to Docker Hub...
       - docker push davtyan111/aws:v1
       - echo Logging out from Docker Hub...
+<<<<<<< HEAD
 
 
 
       #  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
+=======
+>>>>>>> 51fd4e4c2a8831d38fcf16c9e6e6fb308314d753
