@@ -3,18 +3,17 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # Authenticate with Docker Hub (replace with your Docker Hub credentials)
-      - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
-
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_USERNAME
+      - echo $DOCKERHUB_PASSWORD | docker login --username $DOCKERHUB_USERNAME --password-stdin
   build:
     commands:
-      # Build your Docker image (replace "your_docker_image" with your actual image name and tag)
-      - docker build -t davtyan111/template_2 .
-
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
-      # Tag your Docker image (replace "your_docker_image" with your actual image name and tag)
-      - docker tag davtyan111/template_2:latest davtyan111/davtyan111/template_2:latest
-
-      # Push the Docker image to Docker Hub (replace "davtyan111" with your Docker Hub username)
-      - docker push davtyan111/davtyan111/template_2:latest
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $DOCKERHUB_USERNAME/$IMAGE_REPO_NAME:$IMAGE_TAG
