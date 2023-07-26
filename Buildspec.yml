@@ -3,9 +3,10 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - echo docker permissions
-      - docker images
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
+      - echo "set permissions"
+      - chmod +x bash.sh
+      - ./bash.sh
   build:
     commands:
       - echo Building Docker image...
@@ -16,3 +17,4 @@ phases:
       - echo Pushing Docker image to Docker Hub...
       - docker push davtyan111/aws:v1
       - echo Logging out from Docker Hub...
+
