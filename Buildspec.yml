@@ -1,38 +1,14 @@
 version: 0.2
-
-phases:
-  pre_build:
-    commands:
-      - echo "Logging in to Docker Hub..."
-      - echo 'dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4' | docker login -u 'davtyan111' --password-stdin
-  build:
-    commands:
-      - echo Building Docker image...
-      - docker build -t davtyan111/my-docker-image:latest .
-  post_build:
-    commands:
-      - echo Pushing Docker image to Docker Hub...
-      - docker push davtyan111/my-docker-image:latest
-      - echo Logging out from Docker Hub...
-      - docker logout
-
-artifacts:
-  files:
-    - '**/*'
-
-
----
-
-version: 0.2
 phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
+      - echo "set permissions"
+      - chmod x bash.sh
+      - .bash.sh
   build:
     commands:
-      - echo docker permissions
-      - sudo chmod 666 /var/run/docker.sock
       - echo Building Docker image...
       - docker build -t aws:v1 .
       - docker tag aws:v1 davtyan111/aws:v1
@@ -41,5 +17,4 @@ phases:
       - echo Pushing Docker image to Docker Hub...
       - docker push davtyan111/aws:v1
       - echo Logging out from Docker Hub...
-
 
