@@ -3,17 +3,6 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # Check if Docker is installed
-      - which docker
-      - docker --version
-
-      # Install Docker (if not already installed)
-      - |
-        if [ $? -ne 0 ]; then
-          echo "Docker is not installed. Installing Docker..."
-          curl -fsSL https://get.docker.com/ | sh
-        fi
-
       # Authenticate with Docker Hub (replace with your Docker Hub credentials)
       - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
 
