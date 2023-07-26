@@ -3,18 +3,14 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub..."
-      - docker login -u davtyan111 -p dckr_pat_mWhY4vnUhVD0S5Jyn_1SBrAgOG4
+      - docker login -u $docker_hub_username -p $docker_hub_token
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t aws:v2 .
-      - docker tag aws:v2 davtyan111/aws:v2
+      - docker build -t docker_image:v3 .
+      - docker tag docker_image:v3 $docker_hub_username/docker_image:v3
   post_build:
     commands:
       - echo Pushing Docker image to Docker Hub...
-      - docker push davtyan111/aws:v2
+      - docker push $docker_hub_username/docker_image:v3
       - echo Logging out from Docker Hub...
-
-
-
-      #  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
