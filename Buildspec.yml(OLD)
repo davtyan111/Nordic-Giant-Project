@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Docker Hub..."
+      - docker login -u $docker_hub_username -p $docker_hub_token
+  build:
+    commands:
+      - echo Building Docker image...
+      - docker build -t $docker_image:$image_tag .
+      - docker tag $docker_image:$image_tag $docker_hub_username/$docker_image:$image_tag
+  post_build:
+    commands:
+      - echo Pushing Docker image to Docker Hub...
+      - docker push $docker_hub_username/$docker_image:$image_tag
+      - echo Logging out from Docker Hub..
+
