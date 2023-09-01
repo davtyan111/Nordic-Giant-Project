@@ -2,6 +2,8 @@ import subprocess
 import boto3
 
 # Замените на свои учетные данные AWS
+access_key_id = "access_key_id"
+secret_access_key = "secret_access_key"
 region_name = "us-east-2"
 eks_cluster_name = 'clusters'
 
