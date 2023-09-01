@@ -13,12 +13,14 @@ phases:
       - docker build -t test:latest .
       - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
   post_build:
-    commands: 
+    commands:
       - echo Pushing Docker image to Amazon ECR...
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
       - echo Logging out from Amazon ECR...
       - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - echo Configuring kubectl...
+      - aws eks --region us-east-2 update-kubeconfig --name clusters
       - echo Updating Kubernetes deployment...
-      - kubectl apply -f laravel-deployment
+      - kubectl apply -f laravel-deployment.yaml
       - echo Restarting Kubernetes pods...
-      - kubectl rollout restart deployment laravel-deployment -n laravel  # Замените <namespace> на ваше пространство имен
+      - kubectl rollout restart deployment laravel-deployment -n laravel
