@@ -2,8 +2,8 @@ import subprocess
 import boto3
 
 # Замените на свои учетные данные AWS
-access_key_id = "access_key_id"
-secret_access_key = "secret_access_key"
+aws_access_key = "$access_key_id"
+aws_secret_key = "$secret_access_key"
 region_name = "us-east-2"
 eks_cluster_name = 'clusters'
 
@@ -13,8 +13,8 @@ kubectl_command = "kubectl rollout restart deployment/laravel-deployment -n lara
 # Создаем клиент EKS
 eks_client = boto3.client(
     'eks',
-    access_key_id_id=access_key_id, 
-    aws_secret_access_key=secret_access_key,
+    aws_access_key_id=aws_access_key,
+    aws_secret_access_key=aws_secret_key,
     region_name=region_name
 )
 
@@ -61,4 +61,4 @@ users:
 except subprocess.CalledProcessError as e:
     print("Ошибка при выполнении команды kubectl:", e)
 except Exception as e:
-    print("Произошла ошибкa:", e)
+    print("Произошла ошибка:", e)
