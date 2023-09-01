@@ -2,8 +2,6 @@ import subprocess
 import boto3
 
 # Замените на свои учетные данные AWS
-aws_access_key = "AKIAQ7XXZJKSJYKJQ24Z"
-aws_secret_key = "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"
 region_name = "us-east-2"
 eks_cluster_name = 'clusters'
 
@@ -13,8 +11,8 @@ kubectl_command = "kubectl rollout restart deployment/laravel-deployment -n lara
 # Создаем клиент EKS
 eks_client = boto3.client(
     'eks',
-    aws_access_key_id=aws_access_key,
-    aws_secret_access_key=aws_secret_key,
+    access_key_id_id=access_key_id,
+    aws_secret_access_key=secret_access_key,
     region_name=region_name
 )
 
