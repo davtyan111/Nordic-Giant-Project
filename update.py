@@ -13,7 +13,7 @@ kubectl_command = "kubectl rollout restart deployment/laravel-deployment -n lara
 # Создаем клиент EKS
 eks_client = boto3.client(
     'eks',
-    access_key_id_id=access_key_id,
+    access_key_id_id=access_key_id, 
     aws_secret_access_key=secret_access_key,
     region_name=region_name
 )
@@ -61,4 +61,4 @@ users:
 except subprocess.CalledProcessError as e:
     print("Ошибка при выполнении команды kubectl:", e)
 except Exception as e:
-    print("Произошла ошибка:", e)
+    print("Произошла ошибкa:", e)
