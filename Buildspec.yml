@@ -2,22 +2,29 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Logging in to Amazon ECR..."
+      - echo "Configuring AWS CLI..."
       - aws configure set aws_access_key_id $access_key_id
       - aws configure set aws_secret_access_key $secret_access_key
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - aws configure set region us-east-2  # Replace with your AWS region
+      - aws configure set cli/v2/* use-experimental-text-commands=false
+
   build:
     commands:
-      - echo Building Docker image...
+      - echo "Building Docker image..."
       - docker build -t test:latest .
       - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+
   post_build:
     commands:
-      - echo Pushing Docker image to Amazon ECR...
+      - echo "Pushing Docker image to Amazon ECR..."
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-      - echo Logging out from Amazon ECR...
-      - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
-      - echo Restarting pods in Kubernetes...
-      - kubectl rollout restart deployment laravel-deployment -n laravel
-      - echo Waiting for pods to be ready...
-      - kubectl wait --for=condition=available deployment/laravel-deployment  -n laravel  --timeout=600s
+
+      - echo "Configuring kubectl..."
+      - aws eks --region us-east-2 update-kubeconfig --name your-eks-cluster-name  # Replace with your EKS cluster name
+
+      - echo "Restarting pods in Kubernetes..."
+      - kubectl rollout restart deployment your-deployment-name -n your-namespace  # Replace with your deployment and namespace names
+
+      # Optionally, wait for the pods to be ready
+      - echo "Waiting for pods to be ready..."
+      - kubectl wait --for=condition=available deployment/your-deployment-name -n your-namespace --timeout=600s  # Replace with your deployment and namespace names
