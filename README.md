@@ -20,7 +20,7 @@ This project forks from [https://github.com/tbakerx/react-resume-template](https
 ### 2. Run a  the project
 ```shell
 npm i
-npm start
+npm start  
 ```
 
 ### 3. Build
