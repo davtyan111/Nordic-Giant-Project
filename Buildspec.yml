@@ -20,4 +20,4 @@ phases:
       - echo give permissions 
       - chmod +x update.sh
       - echo start update.sh
-      -./update.sh  
+      - ./update.sh  
