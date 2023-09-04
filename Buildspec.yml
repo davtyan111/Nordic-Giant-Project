@@ -3,18 +3,13 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Logging in to Amazon ECR..."
-      - aws configure set aws_access_key_id $access_key_id
-      - aws configure set aws_secret_access_key $secret_access_key
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com
+      - sudo service docker start  # Start the Docker service
   build:
     commands:
-      - echo Building Docker image...
       - docker build -t test:latest .
-      - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-  post_build:
-    commands:
-      - echo Pushing Docker image to Amazon ECR...
-      - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-      - echo Logging out from Amazon ECR...
-      - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - docker tag test:latest 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com/test:latest
+      - docker push 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com/test:latest
+
+artifacts:
+  files: '**/*'
