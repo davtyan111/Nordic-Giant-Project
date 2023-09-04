@@ -10,15 +10,14 @@ phases:
 
   build:
     commands:
-      - echo "Building Docker image..."
+       - echo "Building Docker image..."
        - docker build -t test:latest .
        - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
 
   post_build:
     commands:
-       - echo "Pushing Docker image to Amazon ECR..."
-       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-
+      - echo "Pushing Docker image to Amazon ECR..."
+      - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
       - echo "Configuring kubectl..."
       - aws eks --region us-east-2 update-kubeconfig --name $EKS_CLUSTER_NAME 
 
