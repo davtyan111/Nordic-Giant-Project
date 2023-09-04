@@ -5,7 +5,7 @@ phases:
       - echo "Configuring AWS CLI..."
       - aws configure set aws_access_key_id $access_key_id
       - aws configure set aws_secret_access_key $secret_access_key
-      - aws configure set region us-east-2  # Replace with your AWS region
+      - aws configure set region $AWS_REGION
       - aws configure set cli/v2/* use-experimental-text-commands=false
 
   build:
@@ -19,19 +19,17 @@ phases:
       - echo "Configuring AWS CLI..."
       - aws configure set aws_access_key_id $access_key_id
       - aws configure set aws_secret_access_key $secret_access_key
-      - aws configure set region us-east-2  # Make sure to configure AWS CLI again
+      - aws configure set region $AWS_REGION 
 
       - echo "Authenticating with Amazon ECR..."
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - aws ecr get-login-password --region $AWS_REGION| docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
 
       - echo "Pushing Docker image to Amazon ECR..."
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
 
       - echo "Configuring kubectl..."
-      - aws eks --region us-east-2 update-kubeconfig --name $EKS_CLUSTER_NAME 
+      - aws eks --region $AWS_REGIONupdate-kubeconfig --name $EKS_CLUSTER_NAME 
 
       - echo "Restarting pods in Kubernetes..."
       - kubectl rollout restart deployment laravel-deployment -n laravel 
-
-      # Optionally, wait for the pods to be ready
       - echo "Waiting for pods to be ready..."
