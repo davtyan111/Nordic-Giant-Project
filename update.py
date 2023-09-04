@@ -69,7 +69,7 @@ except Exception as e:
 # Execute the kubectl command using the kubeconfig file
 kubectl_command = ["kubectl", "--kubeconfig", kubeconfig_file_path] + kubectl_command.split()
 try:
-    subprocess.check_call(kubectl_command)
+    subprocess.check_call(" ".join(kubectl_command), shell=True)
     check_error(0)
 except subprocess.CalledProcessError as e:
     check_error(e.returncode)
