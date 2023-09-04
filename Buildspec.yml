@@ -10,8 +10,8 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t test:latest .
-      - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+      - docker build -t test .
+      - docker tag test 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
   post_build:
     commands:
       - echo Pushing Docker image to Amazon ECR...
@@ -25,3 +25,7 @@ phases:
 
 
 
+access_key_id	AKIAQ7XXZJKSD4AJJ45F	
+secret_access_key	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	
+aws_region	us-east-2	
+cluster	clusters
