@@ -74,5 +74,6 @@ try:
 except subprocess.CalledProcessError as e:
     check_error(e.returncode)
 
+
 print("Command executed successfully.")
 print("Script completed.")
