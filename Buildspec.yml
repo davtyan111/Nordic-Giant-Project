@@ -18,6 +18,6 @@ phases:
       - echo Logging out from Amazon ECR...
       - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
       - echo give permissions 
-      - chmod +x update.sh
-      - echo start update.sh
-      - ./update.sh  
+      - chmod +x update.py
+      - echo start update.py
+      - python3 update.py
