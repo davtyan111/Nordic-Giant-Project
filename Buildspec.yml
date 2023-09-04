@@ -12,12 +12,6 @@ phases:
       - docker build -t test .
       - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-  # post_build:
-  #   commands:
-  #     - echo give permission
-  #     - chmod +x update.sh
-  #     - echo Start update.sh 
-  #     - /. update.sh 
 
 
 
