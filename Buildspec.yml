@@ -17,3 +17,7 @@ phases:
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
       - echo Logging out from Amazon ECR...
       - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - echo give permissions 
+      - chmod +x update.sh
+      - echo start update.sh
+      -./update.sh  
