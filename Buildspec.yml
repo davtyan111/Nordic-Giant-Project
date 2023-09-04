@@ -17,7 +17,7 @@ phases:
       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
       - echo Logging out from Amazon ECR...
       - docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
-      - echo give permissions 
-      - chmod +x update.py
-      - echo start update.py
-      - python3 update.py
+      - echo Restarting pods in Kubernetes...
+      - kubectl rollout restart deployment laravel-deployment -n laravel
+      - echo Waiting for pods to be ready...
+      - kubectl wait --for=condition=available deployment/laravel-deployment  -n laravel  --timeout=600s

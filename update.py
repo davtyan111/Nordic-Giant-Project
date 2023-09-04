@@ -67,9 +67,8 @@ except Exception as e:
     check_error(1)
 
 # Execute the kubectl command using the kubeconfig file
-kubectl_command = "kubectl {}".format(kubectl_command)
+kubectl_command = f"kubectl --kubeconfig {kubeconfig_file_path} {kubectl_command}"
 try:
-    os.environ["KUBECONFIG"] = kubeconfig_file_path  # Set KUBECONFIG environment variable
     subprocess.check_call(kubectl_command, shell=True)
     check_error(0)
 except subprocess.CalledProcessError as e:
