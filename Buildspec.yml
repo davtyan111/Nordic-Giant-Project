@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t test:latest
+      - docker build -t test:latest .
       - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
   post_build:
     commands:
