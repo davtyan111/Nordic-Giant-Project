@@ -27,4 +27,4 @@ phases:
 
       # Optionally, wait for the pods to be ready
       - echo "Waiting for pods to be ready..."
-      - kubectl wait --for=condition=available deployment/laravel-deployment-n laravel --timeout=600s  # Replace with your deployment and namespace names
+
