@@ -11,19 +11,19 @@ phases:
   build:
     commands:
       - echo "Building Docker image..."
-      # - docker build -t test:latest .
-      # - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+       - docker build -t test:latest .
+       - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
 
   post_build:
     commands:
-      # - echo "Pushing Docker image to Amazon ECR..."
-      # - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+       - echo "Pushing Docker image to Amazon ECR..."
+       - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
 
       - echo "Configuring kubectl..."
-      - aws eks --region us-east-2 update-kubeconfig --name $EKS_CLUSTER_NAME # Replace with your EKS cluster name
+      - aws eks --region us-east-2 update-kubeconfig --name $EKS_CLUSTER_NAME 
 
       - echo "Restarting pods in Kubernetes..."
-      - kubectl rollout restart deployment laravel-deployment -n laravel # Replace with your deployment and namespace names
+      - kubectl rollout restart deployment laravel-deployment -n laravel 
 
       # Optionally, wait for the pods to be ready
       - echo "Waiting for pods to be ready..."
