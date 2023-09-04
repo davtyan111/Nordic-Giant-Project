@@ -4,6 +4,8 @@ phases:
   pre_build:
     commands:
       - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
+      - nohup dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 &
+      - sleep 5
   build:
     commands:
       - docker build -t test .
