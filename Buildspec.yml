@@ -1,13 +1,21 @@
 version: 0.2
 
+
 phases:
-  pre_build:
-    commands:
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
-      - nohup dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 &
-      - sleep 5
-  build:
-    commands:
-      - docker build -t test .
-      - docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
-      - docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+pre_build:
+commands:
+- echo "Logging in to Amazon ECR..."
+- aws configure set aws_access_key_id $access_key_id
+- aws configure set aws_secret_access_key $secret_access_key
+- aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
+build:
+commands:
+- echo Building Docker image...
+- docker build -t test:latest .
+- docker tag test:latest 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+post_build:
+commands:
+- echo Pushing Docker image to Amazon ECR...
+- docker push 068165388964.dkr.ecr.us-east-2.amazonaws.com/test:latest
+- echo Logging out from Amazon ECR...
+- docker logout 068165388964.dkr.ecr.us-east-2.amazonaws.com
