@@ -3,13 +3,12 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - aws ecr get-login-password --region $aws_region | docker login --username AWS --password-stdin 068165388964.dkr.ecr.$aws_region.amazonaws.com
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com
   build:
     commands:
       - docker build -t test .
-      - docker tag test:latest 068165388964.dkr.ecr.$aws_region.amazonaws.com/test:latest
-      - docker push 068165388964.dkr.ecr.$aws_region.amazonaws.com/test:latest
+      - docker tag test:latest 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com/test:latest
+      - docker push 068165388964.dkr.ecr.$AWS_REGION.amazonaws.com/test:latest
 
 artifacts:
   files: '**/*'
-
