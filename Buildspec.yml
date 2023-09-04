@@ -23,8 +23,8 @@ phases:
       - aws eks --region us-east-2 update-kubeconfig --name $EKS_CLUSTER_NAME # Replace with your EKS cluster name
 
       - echo "Restarting pods in Kubernetes..."
-      - kubectl rollout restart deployment your-deployment-name -n laravel # Replace with your deployment and namespace names
+      - kubectl rollout restart deployment laravel-deployment -n laravel # Replace with your deployment and namespace names
 
       # Optionally, wait for the pods to be ready
       - echo "Waiting for pods to be ready..."
-      - kubectl wait --for=condition=available deployment/your-deployment-name -n laravel --timeout=600s  # Replace with your deployment and namespace names
+      - kubectl wait --for=condition=available deployment/laravel-deployment-n laravel --timeout=600s  # Replace with your deployment and namespace names
