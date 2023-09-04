@@ -6,7 +6,7 @@ phases:
       - echo "Logging in to Amazon ECR..."
       - aws configure set aws_access_key_id $access_key_id
       - aws configure set aws_secret_access_key $secret_access_key
-      - $(aws ecr get-login --no-include-email --region us-east-2)
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 068165388964.dkr.ecr.us-east-2.amazonaws.com
   build:
     commands:
       - docker build -t test .
