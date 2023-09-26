@@ -1,7 +1,7 @@
 import requests
 
 def send_slack_notification(message):
-    webhook_url = 'YOUR_SLACK_WEBHOOK_URL'
+    webhook_url = 'https://hooks.slack.com/services/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'
     payload = {
         'text': message
     }
