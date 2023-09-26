@@ -1,4 +1,3 @@
-import subprocess
 import requests
 
 def send_slack_notification(message):
@@ -15,7 +14,7 @@ def send_slack_notification(message):
         print(f'Произошла ошибка {response.status_code} при отправке уведомления в Slack')
 
 def run_application():
-    process = subprocess.Popen(['python', 'python.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    process = subprocess.Popen(['python3', 'python.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
     while True:
         output = process.stdout.readline()
@@ -35,7 +34,7 @@ def run_application():
     rc = process.poll()
     return rc
 
-if __name__ == '__master__':
+if __name__ == '__main__':
     rc = run_application()
 
     if rc == 0:
