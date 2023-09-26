@@ -1,15 +1,14 @@
 import requests
 
 def send_slack_notification(message, status):
-    webhook_url = 'https://hooks.slack.com/services/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'
-    payload = {
-        'text': message
-    }
-
     if status:
-        payload['text'] = f'Успешно: {message}'
+        webhook_url = 'https://hooks.slack.com/services/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'
+        payload = {
+            'text': f'Успешно: {message}'
+        }
     else:
-        payload['text'] = f'Ошибка: {message}'
+        print(f'Деплоймент завершен с ошибкой: {message}')
+        return
 
     response = requests.post(webhook_url, json=payload)
 
