@@ -1,0 +1,16 @@
+#!/bin/bash
+
+send_slack_notification() {
+    message=$1
+    webhook_url='https://hooks.slack.com/services/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'
+    response=$(curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"$message\"}" $webhook_url)
+
+    if [ $? -eq 0 ] && [ "$(echo $response | jq -r '.ok')" == "true" ]; then
+        echo 'Уведомление успешно отправлено в Slack'
+    else
+        echo "Произошла ошибка при отправке уведомления в Slack"
+    fi
+}
+
+# Пример использования:
+send_slack_notification 'Start'
