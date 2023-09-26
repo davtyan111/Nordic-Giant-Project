@@ -1,0 +1,28 @@
+#!/bin/bash
+
+send_slack_notification() {
+    message=$1
+    status=$2
+
+    if [ $status -eq 1 ]; then
+        webhook_url='https://hooks.slack.com/services/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'
+        text="Успешно: $message"
+    else
+        echo "Деплоймент завершен с ошибкой: $message"
+        return
+    fi
+
+    response=$(curl -X POST -H 'Content-type: application/json' --data "{\"text\": \"$text\"}" $webhook_url)
+
+    if [ $? -eq 0 ]; then
+        echo "$text"
+    else
+        echo "Произошла ошибка $response при отправке уведомления в Slack"
+    fi
+}
+
+# Пример использования при успешном завершении:
+send_slack_notification 'Деплоймент завершен успешно' 1
+
+# Пример использования при ошибке:
+send_slack_notification 'Произошла ошибка при деплойменте' 0
