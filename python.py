@@ -1,3 +1,4 @@
+import subprocess
 import requests
 
 def send_slack_notification(message):
@@ -13,5 +14,31 @@ def send_slack_notification(message):
     else:
         print(f'Произошла ошибка {response.status_code} при отправке уведомления в Slack')
 
-# Пример использования:
-send_slack_notification('Ваше уведомление с помощью App Runner')
+def run_application():
+    process = subprocess.Popen(['python', 'python.py'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+
+    while True:
+        output = process.stdout.readline()
+        error = process.stderr.readline()
+
+        if output == '' and process.poll() is not None:
+            break
+
+        if output:
+            print(output.strip())
+            send_slack_notification(f'Вывод: {output.strip()}')
+
+        if error:
+            print(error.strip())
+            send_slack_notification(f'Ошибка: {error.strip()}')
+
+    rc = process.poll()
+    return rc
+
+if __name__ == '__main__':
+    rc = run_application()
+
+    if rc == 0:
+        send_slack_notification('Процесс завершен успешно')
+    else:
+        send_slack_notification(f'Произошла ошибка, код возврата: {rc}')
