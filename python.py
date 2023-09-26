@@ -35,7 +35,7 @@ def run_application():
     rc = process.poll()
     return rc
 
-if __name__ == '__main__':
+if __name__ == '__master__':
     rc = run_application()
 
     if rc == 0:
